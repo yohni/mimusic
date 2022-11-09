@@ -10,8 +10,6 @@ import Cursor from '../components/Cursor'
 export default function Home() {
   let tl = gsap.timeline()
   let cursor = useRef(null)
-  let posX = 0
-  let posY = 0
   let mouseX = 0
   let mouseY = 0
 
@@ -19,19 +17,17 @@ export default function Home() {
     tl.to({}, 0.016, {
       repeat: -1,
       onRepeat: function () {
-        posX += (mouseX - posX) / 10
-        posY += (mouseY - posY) / 10
         tl.set(cursor, {
           css: {
-            left: posX,
-            top: posY,
+            left: mouseX - 12,
+            top: mouseY - 12,
           },
         })
       },
     })
     document.addEventListener('mousemove', function (e) {
-      mouseX = e.pageX
-      mouseY = e.pageY
+      mouseX = e.clientX
+      mouseY = e.clientY
     })
   })
   return (
